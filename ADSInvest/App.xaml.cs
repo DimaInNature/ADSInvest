@@ -1,17 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using ADSInvest.Services;
+using ADSInvest.ViewModels;
+using ADSInvest.Views;
 using System.Windows;
 
 namespace ADSInvest
 {
-    /// <summary>
-    /// Логика взаимодействия для App.xaml
-    /// </summary>
-    public partial class App : Application
+    public partial class Application : System.Windows.Application
     {
+        public DisplayWindowService DisplayWindow { get; private set; } = new DisplayWindowService();
+
+        public Application() => RegisterWindows();
+        
+        private void RegisterWindows()
+        {
+            DisplayWindow.RegisterWindow<AdminMainViewModel, AdminMainView>();
+            DisplayWindow.RegisterWindow<MainViewModel, MainView>();
+            DisplayWindow.RegisterWindow<AuthorizationViewModel, AuthorizationView>();
+            DisplayWindow.RegisterWindow<RegistrationViewModel, RegistrationView>();
+        }
     }
 }
